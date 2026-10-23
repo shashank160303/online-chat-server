@@ -14,9 +14,3 @@ A multi-client TCP chat server and client written in C using POSIX sockets and p
     ./chat_client [server_ip] [port]
 
 Type `exit` in a client to disconnect.
-
-## Roadmap
-- [x] Step 1: usernames, framing, join/leave messages
-- [ ] Step 2: commands (/list, /msg, /help, /quit)
-- [ ] Step 3: chat rooms and logging
-- [ ] Step 4: epoll-based server and load test
