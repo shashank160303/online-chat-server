@@ -3,3 +3,4 @@ chat_client
 *.o
 
 *.log
+chat_server_threads
