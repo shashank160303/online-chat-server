@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <arpa/inet.h>
@@ -39,7 +40,7 @@ static void *send_thread(void *arg) {
         if (buf[0] == '\0') continue;
 
         send_line(sockfd, buf);
-        if (strcmp(buf, "exit") == 0) {
+        if (strcmp(buf, "exit") == 0 || strcasecmp(buf, "/quit") == 0) {
             printf("Disconnected.\n");
             shutdown(sockfd, SHUT_RDWR);
             close(sockfd);
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]) {
         if (strcmp(reply, "OK") == 0) break;
         printf("%s\n", strncmp(reply, "ERR ", 4) == 0 ? reply + 4 : reply);
     }
-    printf("Connected to Chat Server. Type \"exit\" to leave.\n");
+    printf("Connected to Chat Server. Type /help for commands.\n");
 
     pthread_t tx, rx;
     pthread_create(&rx, NULL, receive_thread, NULL);
